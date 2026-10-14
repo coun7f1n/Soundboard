@@ -7,9 +7,9 @@
     "version": { "code": 1, "name": "0.1.0" },
     "icon": "icon.png",
     "vender": "Soundboard",
-    "description": "Six picture buttons. Six sounds."
+    "description": "Eight sound tiles, settings, and two selectable soundboards."
   },
-  "permissions": [],
+  "permissions": ["device:os.local_storage"],
   "runtime": {
     "apiVersion": {
       "compatible": "3.0.0",
@@ -19,7 +19,7 @@
   },
   "targets": {
     "bip-max": {
-      "module": { "page": { "pages": ["page/index"] } },
+      "module": { "page": { "pages": ["page/index", "page/settings"] } },
       "platforms": [{ "name": "Amazfit Bip Max", "deviceSource": 11206915 }],
       "designWidth": 432
     }
