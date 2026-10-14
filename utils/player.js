@@ -53,12 +53,16 @@ export function createSoundPlayer(onError) {
   });
 
   media.addEventListener(media.event.STOP, () => {
+    if (phase !== 'stopping') return;
     phase = 'idle';
     drain();
   });
 
   media.addEventListener(media.event.COMPLETE, () => {
-    stop();
+    phase = 'completed';
+    media.stop();
+    phase = 'idle';
+    drain();
   });
 
   return {

@@ -1,5 +1,7 @@
 import { createWidget, widget, showToast } from '@zos/ui';
-import { sounds } from '../utils/sounds';
+import { replace } from '@zos/router';
+import { presets } from '../utils/sounds';
+import { getSelectedPreset } from '../utils/preferences';
 import { createSoundPlayer } from '../utils/player';
 
 Page({
@@ -8,17 +10,25 @@ Page({
       showToast({ text: 'Unable to play sound' });
     });
 
-    // 432 x 514 display; inset all six tiles from the rounded corners.
-    sounds.forEach((sound, index) => {
+    const preset = presets.find((item) => item.id === getSelectedPreset());
+    // Shift left and tighten spacing to keep the right edge visible.
+    preset.tiles.forEach((sound, index) => {
       createWidget(widget.BUTTON, {
-        x: 60 + (index % 2) * 164,
-        y: 27 + Math.floor(index / 2) * 156,
-        w: 148,
-        h: 148,
+        x: 1 + (index % 3) * 134,
+        y: 40 + Math.floor(index / 3) * 134,
+        w: 120,
+        h: 120,
         text: '',
         normal_src: sound.image,
         press_src: sound.pressed,
-        click_func: () => this.player.play(sound.audio)
+        click_func: () => {
+          if (sound.action === 'settings') {
+            this.player.destroy();
+            replace({ url: 'page/settings' });
+          } else {
+            this.player.play(sound.audio);
+          }
+        }
       });
     });
   },
