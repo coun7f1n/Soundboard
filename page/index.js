@@ -10,12 +10,13 @@ Page({
       showToast({ text: 'Unable to play sound' });
     });
 
-    const preset = presets.find((item) => item.id === getSelectedPreset());
-    // Shift left and tighten spacing to keep the right edge visible.
+    const selected = getSelectedPreset();
+    const preset = presets.find((item) => item.id === selected);
+    // Center the grid within the Bip 6 rounded screen.
     preset.tiles.forEach((sound, index) => {
       createWidget(widget.BUTTON, {
-        x: 1 + (index % 3) * 134,
-        y: 40 + Math.floor(index / 3) * 134,
+        x: 13 + (index % 3) * 122,
+        y: 43 + Math.floor(index / 3) * 122,
         w: 120,
         h: 120,
         text: '',

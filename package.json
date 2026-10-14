@@ -1,0 +1,12 @@
+{
+  "name": "bip-6-soundboard",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "generate": "node scripts/generate-soundboards.cjs",
+    "prebuild": "npm run generate",
+    "build": "zeus build --target \"Amazfit Bip 6\"",
+    "prepreview": "npm run generate",
+    "preview": "zeus preview"
+  }
+}
